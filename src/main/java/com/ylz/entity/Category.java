@@ -1,21 +1,21 @@
 package com.ylz.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
+import com.baomidou.mybatisplus.annotation.*;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
+import lombok.Data;
+
+import javax.xml.transform.dom.DOMLocator;
 
 /**
- * 员工信息
- * @TableName employee
+ * 菜品及套餐分类
+ * @TableName category
  */
-@TableName(value ="employee")
+@TableName(value ="category")
 @Data
-public class Employee implements Serializable {
+public class Category implements Serializable {
     /**
      * 主键
      */
@@ -23,39 +23,19 @@ public class Employee implements Serializable {
     private Long id;
 
     /**
-     * 姓名
+     * 类型   1 菜品分类 2 套餐分类
+     */
+    private Integer type;
+
+    /**
+     * 分类名称
      */
     private String name;
 
     /**
-     * 用户名
+     * 顺序
      */
-    private String username;
-
-    /**
-     * 密码
-     */
-    private String password;
-
-    /**
-     * 手机号
-     */
-    private String phone;
-
-    /**
-     * 性别
-     */
-    private String sex;
-
-    /**
-     * 身份证号
-     */
-    private String idNumber;
-
-    /**
-     * 状态 0:禁用，1:正常
-     */
-    private Integer status;
+    private Integer sort;
 
     /**
      * 创建时间
@@ -83,5 +63,4 @@ public class Employee implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
-
 }

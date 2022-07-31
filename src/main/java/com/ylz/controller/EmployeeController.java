@@ -74,16 +74,16 @@ public class EmployeeController {
      * @return
      */
     @PostMapping
-    public R<String> save(HttpServletRequest request,@RequestBody  Employee employee){
+    public R<String> save(@RequestBody  Employee employee){
         log.info("新增员工，员工信息{}",employee.toString());
         //设置初始密码，但是需要进行md5加密处理
         employee.setPassword(DigestUtils.md5DigestAsHex("123456".getBytes()));
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
-        //获取当前登录用户id
-        Long empId = (Long) request.getSession().getAttribute("employee");
-        employee.setCreateUser(empId);
-        employee.setUpdateUser(empId);
+//        employee.setCreateTime(LocalDateTime.now());
+//        employee.setUpdateTime(LocalDateTime.now());
+//        //获取当前登录用户id
+//        Long empId = (Long) request.getSession().getAttribute("employee");
+//        employee.setCreateUser(empId);
+//        employee.setUpdateUser(empId);
         employeeService.save(employee);
         return R.success("新增员工成功");
     }
@@ -109,11 +109,11 @@ public class EmployeeController {
      * @return
      */
     @PutMapping
-    public R<String > update(HttpServletRequest request,@RequestBody Employee employee){
+    public R<String > update(@RequestBody Employee employee){
         log.info(employee.toString());
-        Long empId = (Long) request.getSession().getAttribute("employee");
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(empId);
+        //Long empId = (Long) request.getSession().getAttribute("employee");
+        //employee.setUpdateTime(LocalDateTime.now());
+        // employee.setUpdateUser(empId);
         employeeService.updateById(employee);
         return R.success("员工信息修改成功");
     }
