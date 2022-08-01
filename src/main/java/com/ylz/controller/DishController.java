@@ -8,9 +8,10 @@ import com.ylz.service.DishService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 /**
  * @author ylz
@@ -33,5 +34,17 @@ public class DishController {
         return R.success(pageInfo);
     }
 
+    @DeleteMapping
+    public R<String> delete(Long[] ids){
+        log.info("ids={}", Arrays.toString(ids));
+        dishService.removeByIds(Arrays.asList(ids));
+        return R.success("删除成功");
+    }
+    @PostMapping("/status/0")
+    public R<String> stop(Long[] ids){
+        log.info("ids={}",Arrays.toString(ids));
+        //dishService
+        return null;
+    }
 
 }
