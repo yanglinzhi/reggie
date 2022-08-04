@@ -1,7 +1,8 @@
 package com.ylz.service;
 
-import com.ylz.entity.Setmeal;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.ylz.dto.SetmealDto;
+import com.ylz.entity.Setmeal;
 
 /**
 * @author 20258
@@ -9,5 +10,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-08-01 16:48:16
 */
 public interface SetmealService extends IService<Setmeal> {
-
+    /**
+     * 新增套餐，同时需要保存套餐和菜品的关联关系
+     * @param setmealDto
+     */
+    void saveWithDish(SetmealDto setmealDto);
 }

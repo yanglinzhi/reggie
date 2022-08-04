@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author ylz
  * @date 2022/8/1 1:13
@@ -58,10 +60,30 @@ public class CategoryController {
         categoryService.removeById(ids);
         return R.success("删除成功");
     }
+
+    /**
+     * 新增菜品或套餐
+     * @param category
+     * @return
+     */
     @PostMapping
     public R<String> save(@RequestBody Category category){
         log.info(category.toString());
         categoryService.save(category);
         return R.success("新增成功");
+    }
+
+    /**
+     * 根据条件查询分类数据
+     * @param category
+     * @return
+     */
+    @GetMapping("/list")
+    public R<List<Category>> list(Category category){
+        LambdaQueryWrapper<Category> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(category.getType()!=null,Category::getType,category.getType());
+        queryWrapper.orderByDesc(Category::getSort).orderByDesc(Category::getCreateTime);
+        List<Category> list = categoryService.list(queryWrapper);
+        return R.success(list);
     }
 }
